@@ -1,0 +1,37 @@
+<div style="width:300px; margin-left: 1000px">
+  <div style="width:150px; float:left; ">
+    <button  type="button" class="btn btn-default" name="button"><a href="/events">Events Dashboard</a></button>
+  </div>
+
+  <div istyle="width:150px; float:right; padding-left:0; margin-left:0" >
+    <button type="button" class="btn btn-default" name="button"><a href="/logout">Log out</a></button>
+  </div>
+</div>
+<div class="col-md-4">
+<h4>Edit Event</h4>
+<h5 style="color:red"></h5>
+	<form action="/events/<%= @event.id%>/update" method="post">
+		<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+		<div class="form-group">
+	        <label for="name">Name</label>
+	        <input type="text" class="form-control" name="event[name]" value="<%= @event.name%>">
+       </div>
+       <div class="form-group">
+	        <label for="date">Date</label>
+	        <input type="date" class="form-control" name="event[date]" value="<%= @event.date%>" min="date.current">
+       </div>
+       <div class="form-group">
+	        <label for="location">Location</label>
+	        <input type="text" class="form-control" name="event[location]" value="<%= @event.location%>">
+       </div>
+       <div class="form-group">
+        <label for="state">State</label>
+           <select name="event[state]" value="<%= @event.state%>">
+                <% CS.states(:us).each do |key, value|  %>
+                    <option value="<%= key %>"><%= key%></option>
+                <% end %>
+            </select>
+      </div>
+		<input type="submit" class="btn btn-default" value="Update the event" />
+	</form>
+</div>

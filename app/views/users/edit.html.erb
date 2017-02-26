@@ -1,0 +1,47 @@
+<div style="width:300px; margin-left: 1000px">
+  <div style="width:150px; float:left; ">
+    <button  type="button" class="btn btn-default" name="button"><a href="/events">Events Dashboard</a></button>
+  </div>
+
+  <div istyle="width:150px; float:right; padding-left:0; margin-left:0" >
+    <button type="button" class="btn btn-default" name="button"><a href="/logout">Log out</a></button>
+  </div>
+</div>
+
+<div class="col-md-4">
+  <h1>Edit Your Profile</h1>
+  <form class="" action="/users/<%= @user.id%>/edit" method="post">
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+
+    <div class="form-group">
+      <label for="first_name">First Name</label>
+      <input type="text" class="form-control" name="user[first_name]" value="<%= @user.first_name%>"><br>
+    </div>
+
+    <div class="form-group">
+      <label for="last_name">Last Name</label>
+      <input type="text" class="form-control" name="user[last_name]" value="<%= @user.last_name%>"><br>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" name="user[email]" value="<%= @user.email%>"><br>
+    </div>
+
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input type="text" class="form-control" name="user[location]" value="<%= @user.location%>">
+    </div>
+
+    <div class="form-group">
+
+      <select class="" name="user[state]" value="<%= @user.state%>">
+        <% CS.states(:us).each do |key, value| %>
+        <option value="<%= key %>"><%= value %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <input type="submit" class="btn btn-default" value="Update Record" />
+  </form>

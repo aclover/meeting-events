@@ -1,0 +1,71 @@
+
+<div style="width:300px; margin-left: 1000px">
+  <div style="width:150px; float:left; ">
+    <button  type="button" class="btn btn-default" name="button"><a href="/events">Events Dashboard</a></button>
+  </div>
+
+  <div istyle="width:150px; float:right; padding-left:0; margin-left:0" >
+    <button type="button" class="btn btn-default" name="button"><a href="/logout">Log out</a></button>
+  </div>
+</div>
+  <div class="col-dm-6 text-center">
+
+  </div>
+</div>
+
+<div id="userHeader">
+  <h2><%= @event.name%></h2>
+  <p>Host: <%= @event.user.first_name%> <%= @event.user.last_name%></p>
+  <p>Date: <%= @event.date.strftime("%B %d, %Y")%></p>
+  <p>Location: <%= @event.location%> <%= @event.state%></p>
+  <p>People who are joining the event: <%= @event.users_attendings.count%> </p>
+  <% if @event.users_attendings.count > 0%>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+
+        <th>Location</th>
+        <th>State</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <% @event.users_attendings.each do |e|%>
+      <tr>
+        <td><%= e.first_name%> <%= e.last_name%></td>
+        <td><%= e.location%></td>
+        <td><%= e.state%></td>
+
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+</div>
+
+<h3 style="margin-left: 200px">Discussion about this event</h3>
+<div id="comment">
+  <div class="col-md-6">
+
+  </div>
+
+<div class='col-md-12' style='border: 2px solid black; height: 200px; overflow: scroll'>
+<% @event.comments.each do |c| %>
+<p><%= c.user.first_name%> says: <%= c.content%></p>
+<p>-----------</p>
+<% end %>
+</div>
+</div>
+<br><br><br><br>
+<div class="row">
+  <div class="col-dm-6 text-center">
+    <h5>Add Comment</h5>
+    <form class="" action="/comments/<%= @event.id%>" method="post">
+      <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+      <textarea name="comment" rows="3" cols="50"></textarea><br>
+      <input type="submit" name="" value="Submit Comments">
+    </form>
+
+  </div>
+</div>
